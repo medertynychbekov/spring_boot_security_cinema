@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ALL CINEMAS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">CINEMA NAME</th>
+        <th scope="col">CINEMA ADDRESS</th>
+        <th scope="col">CINEMA IMAGE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cinema:${all_cinemas}">
+        <th th:text="${cinema.id}"></th>
+        <td th:text="${cinema.name}"></td>
+        <td th:text="${cinema.address}"></td>
+        <td>
+            <img th:src="@{/cinema/image/{id}(id=${cinema.id})}" alt="there is no photo" width="200px" src=""/>
+        </td>
+        <td>
+        </td>
+        <td>
+            <button>delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button sec:authorize="hasRole('ADMIN')">update</button>
+</body>
+</html>
